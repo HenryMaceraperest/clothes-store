@@ -6,13 +6,13 @@ import './App.css';
 
 import HomePage from './pages/homepage/homepage.page';
 import ShopPage from './pages/shop/shop.page';
-import Header from './components/header/header.component';
 import SignInAndUpPage from './pages/sign-in-and-up/sign-in-and-up.page';
+import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
-  unsubscribeFromAuth = null
+  unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
@@ -22,19 +22,24 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          this.props.setCurrentUser({
+          setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
           });
         });
       }
+
       setCurrentUser(userAuth);
     });
   }
 
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
   render() {
     return (
-      <div >
+      <div>
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
