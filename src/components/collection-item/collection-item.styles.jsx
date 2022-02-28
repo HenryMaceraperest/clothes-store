@@ -40,7 +40,7 @@ export const CollectionFooterContainer = styled.div`
   width: 100%;
   height: 5%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-size: 18px;
 `;
 
