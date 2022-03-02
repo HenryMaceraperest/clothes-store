@@ -16,7 +16,7 @@ const CartIcon = () => {
     const toggleCartHiddenClickHandler = () => dispatch(toggleCartHidden());
 
     return (
-        <CartContainer onClick={toggleCartHiddenClickHandler}>
+        <CartContainer onClick={() => toggleCartHiddenClickHandler()}>
             <ShoppingIcon />
             <ItemCountContainer>{itemCount}</ItemCountContainer>
         </CartContainer>
